@@ -311,7 +311,7 @@
     }
   
     function fetchVideoChunk(url, startByte, callback) {
-      const chunkSize = 1024 * 1024; // 1MB per chunk
+      const chunkSize = 1024 * 10240; // 1MB per chunk
       fetch(url, {
         headers: {
           'Range': `bytes=${startByte}-${startByte + chunkSize - 1}`,
