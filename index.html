@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>XGuardian Analysis</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    h2 {
+      font-size: 18px;
+      color: #7f8c8d;
+    }
+
+    .section {
+      margin-top: 30px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .controls-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: -40px;
+    }
+
+    .radio-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 1px;
+      width: 100%;
+    }
+
+    .radio-group label {
+      margin-right: 15px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    select, input[type="range"], button {
+      padding: 8px 15px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    button:hover, select:hover, input[type="range"]:hover {
+      background-color: #ecf0f1;
+      border-color: #3498db;
+      cursor: pointer;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      margin-right: 10px;
+      color: #34495e;
+    }
+
+    select {
+      min-width: 150px;
+    }
+
+    input[type="range"] {
+      width: 80%;
+      background: linear-gradient(to right, #ff0 0%, #ff0 25%, #ccc 25%, #ccc 100%);
+      height: 8px;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: #3498db;
+      border: none;
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    input[type="range"]:hover {
+      background: linear-gradient(to right, #ff0 0%, #ff0 50%, #ccc 50%, #ccc 100%);
+    }
+
+    input[type="range"]:active::-webkit-slider-thumb {
+      background-color: #2980b9;
+    }
+
+    .media-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 50px;
+      margin-top: 50px;
+    }
+
+    .media-wrapper {
+      position: relative;
+      width: 960px;
+      height: 540px;
+    }
+
+    #analysisVideo,
+    #selectedImage {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    #selectedImage {
+      transform: rotate(180deg);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .overlay-block {
+      position: absolute;
+      top: 0px;
+      left: 5px;
+      width: 170px;
+      height: 100px;
+      background-color: rgba(255, 255, 255, 1.0);
+      z-index: 10;
+    }
+
+    .controls-row .tick-container,
+    .controls-row .feature-container,
+    .controls-row .elimination-container {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .controls-row .feature-container,
+    .controls-row .elimination-container {
+      margin-top: 0px;
+    }
+
+    .controls-row select {
+      min-width: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>XGuardian: Towards Generalized, Explainable and More Effective Server-side Anti-cheat in First-Person Shooter Games</h1>
+  <h2>Explainability Case Study</h2>
+
+  <div class="section radio-group">
+    <label><input type="radio" name="scope" value="elimination" checked> Elimination-scope analysis</label>
+    <label><input type="radio" name="scope" value="match"> Match-scope analysis</label>
+  </div>
+
+  <div id="eliminationContent" class="section">
+    <div class="radio-group">
+      <label><input type="radio" name="video" value="Case A" checked> Case A</label>
+      <label><input type="radio" name="video" value="Case B"> Case B</label>
+      <label><input type="radio" name="video" value="Case C"> Case C</label>
+      <label><input type="radio" name="video" value="Case D"> Case D</label>
+      <label><input type="radio" name="video" value="Case E"> Case E</label>
+    </div>
+
+    <div class="media-container">
+      <div class="media-wrapper">
+        <video id="analysisVideo" controls>
+          <source src="videos/Case A.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <div class="controls-row">
+        <div class="tick-container">
+          <label for="imageSlider">Tick</label>
+          <input type="range" id="imageSlider">
+          <select id="frameSelector"></select>
+        </div>
+
+        <div class="feature-container">
+          <label for="metricSelector">Feature</label>
+          <select id="metricSelector">
+            <option value="acceleration_x">acceleration-x</option>
+            <option value="acceleration_y">acceleration-y</option>
+            <option value="angle_change">angular change</option>
+            <option value="velocity_x">velocity-x</option>
+            <option value="velocity_y">velocity-y</option>
+          </select>
+        </div>
+
+        <div class="elimination-container">
+          <label for="eliminationSelector">Elimination</label>
+          <select id="eliminationSelector"></select>
+        </div>
+      </div>
+
+      <div class="media-wrapper">
+        <img id="selectedImage" src="" alt="Tick SHAP Explainability Image">
+        <div class="overlay-block"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="matchContent" class="section" style="display: none;">
+    <p>Match-scope analysis 内容暂未设置。</p>
+  </div>
+
+  <script>
+    const scopeRadios = document.getElementsByName('scope');
+    const elimContent = document.getElementById('eliminationContent');
+    const matchContent = document.getElementById('matchContent');
+    const videoRadios = document.getElementsByName('video');
+    const videoPlayer = document.getElementById('analysisVideo');
+    const imageSlider = document.getElementById('imageSlider');
+    const frameSelector = document.getElementById('frameSelector');
+    const metricSelector = document.getElementById('metricSelector');
+    const eliminationSelector = document.getElementById('eliminationSelector');
+    const selectedImage = document.getElementById('selectedImage');
+
+    let currentCase = "Case A";
+    let currentElimination = "1";
+
+    const frameRanges = {
+      "Case A": { "1": [1152, 1247], "2": [1248, 1343] },
+      "Case B": { "1": [384, 479] },
+      "Case C": { "1": [768, 863] },
+      "Case D": { "1": [1440, 1535] },
+      "Case E": { "1": [1344, 1439], "2": [1440, 1535], "3": [1536, 1631] },
+    };
+
+    function updateVideoAndEliminations() {
+      videoPlayer.src = `videos/${currentCase}.mp4`;
+      videoPlayer.load();
+
+      eliminationSelector.innerHTML = "";
+      const eliminations = Object.keys(frameRanges[currentCase]);
+      eliminations.forEach(elim => {
+        const opt = document.createElement("option");
+        opt.value = elim;
+        opt.textContent = elim;
+        eliminationSelector.appendChild(opt);
+      });
+      currentElimination = eliminations[0];
+      eliminationSelector.value = currentElimination;
+
+      updateFrameOptions();
+    }
+
+    function updateFrameOptions() {
+      const [start, end] = frameRanges[currentCase][currentElimination];
+      frameSelector.innerHTML = "";
+      for (let i = start; i <= end; i++) {
+        const opt = document.createElement("option");
+        opt.value = i;
+        opt.textContent = i;
+        frameSelector.appendChild(opt);
+      }
+      imageSlider.min = start;
+      imageSlider.max = end;
+      imageSlider.value = end;
+      frameSelector.value = end;
+      updateImage();
+    }
+
+    function updateImage() {
+      const frame = frameSelector.value;
+      const metric = metricSelector.value;
+      const imgPath = `images/${currentCase}/${currentElimination}/${metric}_shap_value_${frame}.png`;
+      selectedImage.src = imgPath;
+    }
+
+    scopeRadios.forEach(r => {
+      r.addEventListener('change', () => {
+        if (r.value === 'elimination') {
+          elimContent.style.display = 'block';
+          matchContent.style.display = 'none';
+        } else {
+          elimContent.style.display = 'none';
+          matchContent.style.display = 'block';
+        }
+      });
+    });
+
+    videoRadios.forEach(v => {
+      v.addEventListener('change', () => {
+        currentCase = v.value;
+        updateVideoAndEliminations();
+      });
+    });
+
+    eliminationSelector.addEventListener('change', () => {
+      currentElimination = eliminationSelector.value;
+      updateFrameOptions();
+    });
+
+    imageSlider.addEventListener('input', () => {
+      frameSelector.value = imageSlider.value;
+      updateImage();
+    });
+
+    frameSelector.addEventListener('change', () => {
+      imageSlider.value = frameSelector.value;
+      updateImage();
+    });
+
+    metricSelector.addEventListener('change', updateImage);
+
+    updateVideoAndEliminations();
+  </script>
+
+</body>
+</html>

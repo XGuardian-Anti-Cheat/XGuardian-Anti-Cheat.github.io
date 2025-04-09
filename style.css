@@ -1,0 +1,22 @@
+
+body {
+    background-color: #121212;
+    color: #00ff99;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+  }
+  h1, h2 {
+    text-shadow: 0 0 5px #00ff99;
+  }
+  video, img {
+    border: 2px solid #00ff99;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #00ff99;
+  }
+  select, input[type="range"] {
+    background-color: #1e1e1e;
+    color: #00ff99;
+    border: 1px solid #00ff99;
+    padding: 5px;
+  }
+  
