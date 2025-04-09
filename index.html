@@ -279,10 +279,10 @@
     const metricSelector = document.getElementById('metricSelector');
     const eliminationSelector = document.getElementById('eliminationSelector');
     const selectedImage = document.getElementById('selectedImage');
-
+  
     let currentCase = "Case A";
     let currentElimination = "1";
-
+  
     const frameRanges = {
       "Case A": { "1": [1152, 1247], "2": [1248, 1343] },
       "Case B": { "1": [384, 479] },
@@ -290,11 +290,50 @@
       "Case D": { "1": [1440, 1535] },
       "Case E": { "1": [1344, 1439], "2": [1440, 1535], "3": [1536, 1631] },
     };
-
+  
+    // Create a MediaSource for progressive loading
+    const mediaSource = new MediaSource();
+    videoPlayer.src = URL.createObjectURL(mediaSource);
+  
+    let sourceBuffer;
+    mediaSource.addEventListener('sourceopen', () => {
+      // Initialize the SourceBuffer
+      sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
+      loadVideoChunk(currentCase, 0);  // Start by loading the first chunk
+    });
+  
+    function loadVideoChunk(caseName, startByte) {
+      const videoUrl = `videos/${caseName}.mp4`;
+      fetchVideoChunk(videoUrl, startByte, (data) => {
+        // Append the video chunk to the source buffer
+        sourceBuffer.appendBuffer(data);
+      });
+    }
+  
+    function fetchVideoChunk(url, startByte, callback) {
+      const chunkSize = 1024 * 1024; // 1MB per chunk
+      fetch(url, {
+        headers: {
+          'Range': `bytes=${startByte}-${startByte + chunkSize - 1}`,
+        }
+      })
+      .then(response => response.arrayBuffer())
+      .then(data => {
+        callback(data);
+        if (data.byteLength === chunkSize) {
+          // If more data is available, load the next chunk
+          loadVideoChunk(currentCase, startByte + chunkSize);
+        }
+      })
+      .catch(err => console.error('Error fetching video chunk:', err));
+    }
+  
     function updateVideoAndEliminations() {
-      videoPlayer.src = `videos/${currentCase}.mp4`;
-      videoPlayer.load();
-
+      // Reset video source and begin loading new video in chunks
+      mediaSource.removeSourceBuffer(sourceBuffer);
+      mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
+      loadVideoChunk(currentCase, 0);
+  
       eliminationSelector.innerHTML = "";
       const eliminations = Object.keys(frameRanges[currentCase]);
       eliminations.forEach(elim => {
@@ -305,10 +344,10 @@
       });
       currentElimination = eliminations[0];
       eliminationSelector.value = currentElimination;
-
+  
       updateFrameOptions();
     }
-
+  
     function updateFrameOptions() {
       const [start, end] = frameRanges[currentCase][currentElimination];
       frameSelector.innerHTML = "";
@@ -324,14 +363,14 @@
       frameSelector.value = end;
       updateImage();
     }
-
+  
     function updateImage() {
       const frame = frameSelector.value;
       const metric = metricSelector.value;
       const imgPath = `images/${currentCase}/${currentElimination}/${metric}_shap_value_${frame}.png`;
       selectedImage.src = imgPath;
     }
-
+  
     scopeRadios.forEach(r => {
       r.addEventListener('change', () => {
         if (r.value === 'elimination') {
@@ -343,33 +382,34 @@
         }
       });
     });
-
+  
     videoRadios.forEach(v => {
       v.addEventListener('change', () => {
         currentCase = v.value;
         updateVideoAndEliminations();
       });
     });
-
+  
     eliminationSelector.addEventListener('change', () => {
       currentElimination = eliminationSelector.value;
       updateFrameOptions();
     });
-
+  
     imageSlider.addEventListener('input', () => {
       frameSelector.value = imageSlider.value;
       updateImage();
     });
-
+  
     frameSelector.addEventListener('change', () => {
       imageSlider.value = frameSelector.value;
       updateImage();
     });
-
+  
     metricSelector.addEventListener('change', updateImage);
-
+  
     updateVideoAndEliminations();
   </script>
+  
   <!-- jQuery -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
