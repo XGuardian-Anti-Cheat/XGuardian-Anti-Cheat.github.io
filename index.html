@@ -2,50 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!-- 标准元数据 -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>XGuardian Anti-Cheat</title>
+  <meta name="author" content="Anonymous" />
+  <meta name="description" content="XGuardian" />
+  <meta name="keywords" content="XGuardian-Anti-Cheat" />
   
-    <!-- Standard metadata -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>XGuardian Anti-Cheat</title>
-    <meta name="author" content="Anonymous" />
-    <meta name="description" content="XGuardian" />
-    <meta name="keywords" content="XGuardian-Anti-Cheat" />
+  <!-- Bootstrap & MDB -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css"
+    integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
   
-    <!-- Bootstrap & MDB -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css"
-      integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"
+    integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css"
+    integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
   
-    <!-- Fonts & Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"
-      integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css"
-      integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css"
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+  <!-- 代码语法高亮 -->
+  <link rel="stylesheet" href="./assets/css/github.css" />
   
-    <!-- Code Syntax Highlighting -->
-    <link rel="stylesheet" href="./assets/css/github.css" />
+  <!-- 样式 -->
+  <link rel="icon" href="./assets/img/icon.png">
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <link rel="stylesheet" href="styles.css">
   
-    <!-- Styles -->
-    <link rel="icon" href="./assets/img/icon.png">
-    <link rel="stylesheet" href="./assets/css/main.css">
-    <link rel="stylesheet" href="styles.css">
-  
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VHPFHC4JTP"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', 'G-VHPFHC4JTP');
-    </script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async
-            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VHPFHC4JTP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-VHPFHC4JTP');
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -165,7 +164,6 @@
       height: 540px;
     }
 
-    #analysisVideo,
     #selectedImage {
       width: 100%;
       height: 100%;
@@ -227,10 +225,7 @@
 
     <div class="media-container">
       <div class="media-wrapper">
-        <video id="analysisVideo" controls>
-          <source src="videos/Case A.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+        <iframe id="analysisVideo" width="960" height="540" src="https://www.youtube.com/embed/Mg_QsZdhQ9Y" frameborder="0" allowfullscreen></iframe>
       </div>
 
       <div class="controls-row">
@@ -291,48 +286,16 @@
       "Case E": { "1": [1344, 1439], "2": [1440, 1535], "3": [1536, 1631] },
     };
   
-    // Create a MediaSource for progressive loading
-    const mediaSource = new MediaSource();
-    videoPlayer.src = URL.createObjectURL(mediaSource);
-  
-    let sourceBuffer;
-    mediaSource.addEventListener('sourceopen', () => {
-      // Initialize the SourceBuffer
-      sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
-      loadVideoChunk(currentCase, 0);  // Start by loading the first chunk
-    });
-  
-    function loadVideoChunk(caseName, startByte) {
-      const videoUrl = `videos/${caseName}.mp4`;
-      fetchVideoChunk(videoUrl, startByte, (data) => {
-        // Append the video chunk to the source buffer
-        sourceBuffer.appendBuffer(data);
-      });
-    }
-  
-    function fetchVideoChunk(url, startByte, callback) {
-      const chunkSize = 1024 * 10240; // 1MB per chunk
-      fetch(url, {
-        headers: {
-          'Range': `bytes=${startByte}-${startByte + chunkSize - 1}`,
-        }
-      })
-      .then(response => response.arrayBuffer())
-      .then(data => {
-        callback(data);
-        if (data.byteLength === chunkSize) {
-          // If more data is available, load the next chunk
-          loadVideoChunk(currentCase, startByte + chunkSize);
-        }
-      })
-      .catch(err => console.error('Error fetching video chunk:', err));
-    }
-  
     function updateVideoAndEliminations() {
-      // Reset video source and begin loading new video in chunks
-      mediaSource.removeSourceBuffer(sourceBuffer);
-      mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
-      loadVideoChunk(currentCase, 0);
+      // 修改YouTube视频源
+      const youtubeUrls = {
+        "Case A": "https://www.youtube.com/embed/Mg_QsZdhQ9Y",
+        "Case B": "https://www.youtube.com/embed/1hUP1UqnCpo",
+        "Case C": "https://www.youtube.com/embed/r020BM_daoc",
+        "Case D": "https://www.youtube.com/embed/dYyCISSXbgE",
+        "Case E": "https://www.youtube.com/embed/lF0cJy4l53w",
+      };
+      videoPlayer.src = youtubeUrls[currentCase];
   
       eliminationSelector.innerHTML = "";
       const eliminations = Object.keys(frameRanges[currentCase]);
@@ -367,82 +330,38 @@
     function updateImage() {
       const frame = frameSelector.value;
       const metric = metricSelector.value;
-      const imgPath = `images/${currentCase}/${currentElimination}/${metric}_shap_value_${frame}.png`;
+      const imgPath = `images/${currentCase}/elimination${currentElimination}/${metric}_shap_value_${frame}.png`;
       selectedImage.src = imgPath;
     }
   
-    scopeRadios.forEach(r => {
-      r.addEventListener('change', () => {
-        if (r.value === 'elimination') {
-          elimContent.style.display = 'block';
-          matchContent.style.display = 'none';
+    scopeRadios.forEach(radio => {
+      radio.addEventListener("change", (event) => {
+        if (event.target.value === "elimination") {
+          elimContent.style.display = "block";
+          matchContent.style.display = "none";
         } else {
-          elimContent.style.display = 'none';
-          matchContent.style.display = 'block';
+          elimContent.style.display = "none";
+          matchContent.style.display = "block";
         }
       });
     });
   
-    videoRadios.forEach(v => {
-      v.addEventListener('change', () => {
-        currentCase = v.value;
+    videoRadios.forEach(radio => {
+      radio.addEventListener("change", (event) => {
+        currentCase = event.target.value;
         updateVideoAndEliminations();
       });
     });
   
-    eliminationSelector.addEventListener('change', () => {
-      currentElimination = eliminationSelector.value;
+    eliminationSelector.addEventListener("change", (event) => {
+      currentElimination = event.target.value;
       updateFrameOptions();
     });
   
-    imageSlider.addEventListener('input', () => {
-      frameSelector.value = imageSlider.value;
-      updateImage();
-    });
+    frameSelector.addEventListener("change", updateImage);
+    metricSelector.addEventListener("change", updateImage);
   
-    frameSelector.addEventListener('change', () => {
-      imageSlider.value = frameSelector.value;
-      updateImage();
-    });
-  
-    metricSelector.addEventListener('change', updateImage);
-    
-    updateFrameOptions();
     updateVideoAndEliminations();
   </script>
-  
-  <!-- jQuery -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-  <!-- Bootsrap & MDB scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
-    integrity="sha256-SyTu6CwrfOhaznYZPoolVw2rxoY7lKYKQvqbtqN93HI=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js"
-    integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
-
-  <!-- Bootstrap & jQuery libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
-  <script>
-    $(document).ready(function(){
-      $('[data-toggle="tooltip"]').tooltip(); // Activate all tooltips
-    });
-  </script>
-
-  <!-- Mansory & imagesLoaded -->
-  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
-    integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-  <script defer src="./assets/js/mansory.js" type="text/javascript"></script>
-
-  <!-- Medium Zoom JS -->
-  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"
-    integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
-  <script src="./assets/js/zoom.js"></script><!-- Load Common JS -->
-  <script src="./assets/js/common.js"></script>
 </body>
 </html>
