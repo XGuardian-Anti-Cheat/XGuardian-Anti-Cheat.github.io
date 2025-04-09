@@ -330,37 +330,35 @@
     function updateImage() {
       const frame = frameSelector.value;
       const metric = metricSelector.value;
-      const imgPath = `images/${currentCase}/elimination${currentElimination}/${metric}_shap_value_${frame}.png`;
+      const imgPath = `images/${currentCase}/${currentElimination}/${metric}_shap_value_${frame}.png`;
       selectedImage.src = imgPath;
     }
   
-    scopeRadios.forEach(radio => {
-      radio.addEventListener("change", (event) => {
-        if (event.target.value === "elimination") {
-          elimContent.style.display = "block";
-          matchContent.style.display = "none";
-        } else {
-          elimContent.style.display = "none";
-          matchContent.style.display = "block";
-        }
-      });
-    });
-  
-    videoRadios.forEach(radio => {
-      radio.addEventListener("change", (event) => {
-        currentCase = event.target.value;
+    videoRadios.forEach(v => {
+      v.addEventListener('change', () => {
+        currentCase = v.value;
         updateVideoAndEliminations();
       });
     });
   
-    eliminationSelector.addEventListener("change", (event) => {
-      currentElimination = event.target.value;
+    eliminationSelector.addEventListener('change', () => {
+      currentElimination = eliminationSelector.value;
       updateFrameOptions();
     });
   
-    frameSelector.addEventListener("change", updateImage);
-    metricSelector.addEventListener("change", updateImage);
+    imageSlider.addEventListener('input', () => {
+      frameSelector.value = imageSlider.value;
+      updateImage();
+    });
   
+    frameSelector.addEventListener('change', () => {
+      imageSlider.value = frameSelector.value;
+      updateImage();
+    });
+  
+    metricSelector.addEventListener('change', updateImage);
+    
+    updateFrameOptions();
     updateVideoAndEliminations();
   </script>
 </body>
