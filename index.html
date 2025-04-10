@@ -228,6 +228,11 @@
         <iframe id="analysisVideo" width="960" height="540" src="https://www.youtube.com/embed/Mg_QsZdhQ9Y" frameborder="0" allowfullscreen></iframe>
       </div>
 
+      <p id="caseDescription" style="margin-top: 20px; font-size: 16px; color: #555; text-align: center; max-width: 800px;">
+        <!-- 初始内容 -->
+        This analysis focuses on key movements and feature contributions around specific elimination events in Case A.
+      </p>
+
       <div class="controls-row">
         <div class="tick-container">
           <label for="imageSlider">Tick</label>
@@ -260,7 +265,16 @@
   </div>
 
   <div id="matchContent" class="section" style="display: none;">
-    <p>Match-scope analysis 内容暂未设置。</p>
+    <div class="media-container">
+      <div class="media-wrapper">
+        <img src="images/match_scope_overview.png" alt="Match-scope Overview" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      </div>
+      <p style="margin-top: 20px; font-size: 16px; color: #555;">
+        The match-scope analysis offers a broader perspective by aggregating feature contributions across the entire game session. 
+        This allows for identifying suspicious behavioral patterns that may not be evident within single elimination events.
+      </p>
+    </div>
+    
   </div>
 
   <script>
@@ -285,6 +299,19 @@
       "Case D": { "1": [1440, 1535] },
       "Case E": { "1": [1344, 1439], "2": [1440, 1535], "3": [1536, 1631] },
     };
+
+    scopeRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (radio.value === "elimination") {
+          elimContent.style.display = "block";
+          matchContent.style.display = "none";
+        } else {
+          elimContent.style.display = "none";
+          matchContent.style.display = "block";
+        }
+      });
+    });
+
   
     function updateVideoAndEliminations() {
       // 修改YouTube视频源
@@ -325,6 +352,7 @@
       imageSlider.value = end;
       frameSelector.value = end;
       updateImage();
+      document.getElementById("caseDescription").textContent = caseDescriptions[currentCase];
     }
   
     function updateImage() {
@@ -357,6 +385,15 @@
     });
   
     metricSelector.addEventListener('change', updateImage);
+
+    const caseDescriptions = {
+      "Case A": "This analysis focuses on key movements and feature contributions around specific elimination events in Case A.",
+      "Case B": "In Case B, we observe irregular aiming behavior and sudden velocity changes that may indicate suspicious patterns.",
+      "Case C": "Case C presents a subtle yet consistent deviation from normal gameplay, especially during turning movements.",
+      "Case D": "In this case, the suspect exhibits highly reactive movement, prompting a deeper examination of angular changes.",
+      "Case E": "Case E includes multiple elimination events, enabling a comparative look at various suspicious behavior patterns.",
+    };
+
     
     updateFrameOptions();
     updateVideoAndEliminations();
