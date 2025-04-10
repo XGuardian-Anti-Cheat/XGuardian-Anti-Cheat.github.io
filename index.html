@@ -203,6 +203,15 @@
       min-width: 100px;
     }
   </style>
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+
+  <!-- jQuery（如果你还没引入） -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- DataTables JS -->
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
 </head>
 <body>
 
@@ -223,14 +232,29 @@
       <label><input type="radio" name="video" value="Case E"> Case E</label>
     </div>
 
+    <div class="note-text text-center">
+      <p style="margin-top: 20px; font-size: 16px; color: #555;"> 
+        Note
+      </p>
+      <p style="margin-top: 20px; font-size: 16px; color: #555;"> 
+        1. HUDs (in-game UI overlays, e.g., health bar, navigation map, avatar's ID, kill info, etc.) that may disclose any information are hidden;
+      </p>
+      <p style="margin-top: 20px; font-size: 16px; color: #555;"> 
+      2. X-Ray (highlighted character borders can be seen through obstacles) is activated for better illustration purpose. In real-world matches, the normal players will not obtain this function.
+      </p>
+      <p style="margin-top: 20px; font-size: 16px; color: #555;"> 
+        3. The legends of the explainable trajectories are idnetical both in the video and the interactive images below.
+      </p>
+    </div>
+
     <div class="media-container">
       <div class="media-wrapper">
         <iframe id="analysisVideo" width="960" height="540" src="https://www.youtube.com/embed/Mg_QsZdhQ9Y" frameborder="0" allowfullscreen></iframe>
       </div>
 
-      <p id="caseDescription" style="margin-top: 20px; font-size: 16px; color: #555; text-align: center; max-width: 800px;">
+      <p id="caseDescription" style="margin-top: 20px; font-size: 16px; color: #555; text-align: center; max-width: 800px; white-space: pre-line;">
         <!-- 初始内容 -->
-        This analysis focuses on key movements and feature contributions around specific elimination events in Case A.
+        Default display.
       </p>
 
       <div class="controls-row">
@@ -267,12 +291,68 @@
   <div id="matchContent" class="section" style="display: none;">
     <div class="media-container">
       <div class="media-wrapper">
-        <img src="images/match_scope_overview.png" alt="Match-scope Overview" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+        <div class="prediction-table-container" style="overflow-x: auto; margin-bottom: 20px;">
+          <p style="margin-top: 20px; font-size: 16px; color: #555;">
+            This page demonstrates how XGuardian generates the explainable final match prediction. First, it produces an original prediction for each elimination, as shown in the table below.
+          </p>
+          
+          <table id="prediction-table" style="width: 100%; max-width: 800px; margin: auto; font-size: 14px;">
+            <thead style="background-color: #f0f0f0;">
+              <tr>
+                <th>Elimination #</th>
+                <th>Original Prediction After the Aggregation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">1</td><td style="padding: 6px; border: 1px solid #ccc;">0.684117</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">2</td><td style="padding: 6px; border: 1px solid #ccc;">0.6946051</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">3</td><td style="padding: 6px; border: 1px solid #ccc;">0.6873236</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">4</td><td style="padding: 6px; border: 1px solid #ccc;">0.7693209</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">5</td><td style="padding: 6px; border: 1px solid #ccc;">0.73794997</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">6</td><td style="padding: 6px; border: 1px solid #ccc;">0.7006488</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">7</td><td style="padding: 6px; border: 1px solid #ccc;">0.6901594</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">8</td><td style="padding: 6px; border: 1px solid #ccc;">0.6728578</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">9</td><td style="padding: 6px; border: 1px solid #ccc;">0.7000603</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">10</td><td style="padding: 6px; border: 1px solid #ccc;">0.726555</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">11</td><td style="padding: 6px; border: 1px solid #ccc;">0.6647711</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">12</td><td style="padding: 6px; border: 1px solid #ccc;">0.67824334</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">13</td><td style="padding: 6px; border: 1px solid #ccc;">0.6937227</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">14</td><td style="padding: 6px; border: 1px solid #ccc;">0.6991382</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">15</td><td style="padding: 6px; border: 1px solid #ccc;">0.68439555</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">16</td><td style="padding: 6px; border: 1px solid #ccc;">0.6942821</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">17</td><td style="padding: 6px; border: 1px solid #ccc;">0.70512176</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">18</td><td style="padding: 6px; border: 1px solid #ccc;">0.6243448</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">19</td><td style="padding: 6px; border: 1px solid #ccc;">0.6593147</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">20</td><td style="padding: 6px; border: 1px solid #ccc;">0.6644799</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">21</td><td style="padding: 6px; border: 1px solid #ccc;">0.70384914</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">22</td><td style="padding: 6px; border: 1px solid #ccc;">0.68810034</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">23</td><td style="padding: 6px; border: 1px solid #ccc;">0.69289875</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">24</td><td style="padding: 6px; border: 1px solid #ccc;">0.6848471</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">25</td><td style="padding: 6px; border: 1px solid #ccc;">0.5973644</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">26</td><td style="padding: 6px; border: 1px solid #ccc;">0.52587</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">27</td><td style="padding: 6px; border: 1px solid #ccc;">0.60854065</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">28</td><td style="padding: 6px; border: 1px solid #ccc;">0.63035697</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">29</td><td style="padding: 6px; border: 1px solid #ccc;">0.663132</td></tr>
+              <tr><td style="padding: 6px; border: 1px solid #ccc;">30</td><td style="padding: 6px; border: 1px solid #ccc;">0.53972197</td></tr>
+            </tbody>
+            <tfoot style="background-color: #f0f0f0;">
+              <tr>
+                <th>Average (Input of the Match Prediction)</th>
+                <th>0.6722031113333333</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        
+        <p style="margin-top: 20px; font-size: 16px; color: #555; text-align: center; white-space: pre-line;">
+          The mean-aggregated original predictions serve as input to the random forest model for match prediction. Through its decision-making process, the model generates XGuardian's final judgment. The following diagram illustrates how the sample player in the above table was determined.
+          
+          In this diagram, X-axis indicates the input value of the sample for the given feature; Y-axis denotes the adjusted SHAP values. For more intuitive visualization, the original SHAP values (computed by the model interpreter) are offset so that the value corresponding to the dynamic threshold probability equals 0. This value reflects the difference between the sample's predicted positive-class probability and the dynamic threshold. A transformed SHAP value of 0 indicates the prediction probability exactly matches the dynamically computed threshold on the training set, while positive/negative values represent deviations above/below the threshold; All normal samples are colored dimgray; Circles represent ground-truth cheaters; Triangles represent ground-truth normal players; The case study sample is highlighted with a purple star marker.
+          
+          The sample's input value of 0.6722031113333333 lies above the decision boundary, causing the model to classify it as positive (i.e., a cheating player).
+        </p>
+        <img src="images\Match-scope\cs_original_prediction_avg.svg" alt="Match-scope Explain" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
       </div>
-      <p style="margin-top: 20px; font-size: 16px; color: #555;">
-        The match-scope analysis offers a broader perspective by aggregating feature contributions across the entire game session. 
-        This allows for identifying suspicious behavioral patterns that may not be evident within single elimination events.
-      </p>
     </div>
     
   </div>
@@ -387,12 +467,31 @@
     metricSelector.addEventListener('change', updateImage);
 
     const caseDescriptions = {
-      "Case A": "This analysis focuses on key movements and feature contributions around specific elimination events in Case A.",
-      "Case B": "In Case B, we observe irregular aiming behavior and sudden velocity changes that may indicate suspicious patterns.",
-      "Case C": "Case C presents a subtle yet consistent deviation from normal gameplay, especially during turning movements.",
-      "Case D": "In this case, the suspect exhibits highly reactive movement, prompting a deeper examination of angular changes.",
-      "Case E": "Case E includes multiple elimination events, enabling a comparative look at various suspicious behavior patterns.",
+      "Case A": `In the Case A video demonstration, the player is utilizing aim-assist cheating. Notably, even when the player's vision was fully obscured by smoke grenades and all opponents were concealed behind obstacles, they exhibited unnaturally precise tracking of enemy positions.\n\nSuch behavior is implausible even for professional players, as evidenced by two key observations:\n\na) Pre-firing through visual obstruction: Immediately after exiting the smoke, the player scoped in and attempted to shoot an enemy hidden behind a wall (timestamp 0:04);\n\nb) Instant 180-degree target acquisition: The player then abruptly rotated their crosshair approximately 180 degrees to accurately lock onto two enemies originally positioned behind them (timestamp 0:06).\n\nFurther analysis of the explainable aiming trajectory reveals anomalous behavior in both:\n\na) Vertical aiming velocity (Y-axis): During the kill tick (please adjust the filter below as: Elimination=2, ticks 1248-1286, Feature=Velocity-y), the Y-axis movement speed was flagged by XGuardian as highly aberrant (light red indicate the current feature at the current tick brings large contribution to the positive prediction outcome);\n\nb) Angular adjustments post-kill: The aim-assist cheat triggered subtle corrective adjustments—for example, an anomalous angular change was detected at tick 1301 (please adjust the filter below as: Elimination=2, Feature=Angular Change) immediately following a kill.`,
+      "Case B": "In the Case B video, the player demonstrates legitimate gameplay behavior. As evidenced by the trajectory analysis, the majority of their explainable trajectories are displayed in light blue, dark blue or purple, indicating that the corresponding features contributed negatively or contributed neither negatively nor positively to the model's prediction (i.e., supporting the classification as a non-cheating player).\n\n The pre-aiming behavior of legitimate players exhibits the following characteristics:\n\na) Crosshair Discipline:\n- Does not persistently track enemies through obstacles\n- Maintains natural movement patterns without wall-following\n\nb) Reaction Timing:\n- Does not fire immediately before enemy appearance\n- Shows human-possible reaction times even with audible cues\n- No impossibly quick shots after enemy visibility\n\nc) Strategic Positioning:\n- Maintains pre-aim at probable enemy locations\n- Focuses on tactical positions (e.g., crate corners in this case)\n- Demonstrates map-aware positioning without omniscience.",
+      "Case C": "In Case C, we observe a highly aggressive cheater utilizing aimbot, a subtype of aim-assist cheating, with no attempt at concealment. A seasoned player can immediately identify suspicious behavior upon reviewing the demo.\n\nKey indicators include:\n\na) Unnatural Shot Registration: At normal speed, the player achieves kills despite seemingly misaligned crosshair placement (timestamp 0:05);\n\nb) Robotic Locking Behavior: In slow-motion replay (timestamps 0:42–0:43), the aiming trajectory exhibits inhumanly rapid jumps between targets, characteristic of unrefined aimbot tuning.\n\nExplainable Trajectory Analysis further confirms cheating:\n\na) Pre-kill Anomaly (ticks 829–830): The crosshair snaps instantaneously to the kill position, with abnormal acceleration-y values;\n\nb) Post-kill Artifacts (ticks 832–837): The crosshair oscillates erratically, producing anomalous angular changes, velocity-y fluctuations and acceleration-x spikes.\n\nThis pattern aligns with known aim-assist aimbot signatures where overcorrection and mechanical precision coexist.",
+      "Case D": "In Case D, we analyze a cheater attempting to disguise their use of a subtype of aim-assist cheat wallhack by mimicking legitimate gameplay.\n\nPlayers employing wallhacks frequently exhibit a distinct behavioral pattern:\n- They pre-aim at enemy positions before visual contact\n- Secure kills with minimal adjustments\n- Then rapidly flick away to avoid suspicion\n\nThe player consistently aligns their crosshair with enemy locations prior to visual confirmation, a hallmark of wallhack usage.\n\nXGuardian successfully flagged this pattern, with anomalies detected in:\n- acceleration-x (abrupt horizontal corrections)\n- velocity-y (unusual vertical tracking)\n\nLegitimate players rarely perform pronounced vertical adjustments during pre-aiming unless they possess prior knowledge of enemy positioning.\n\nA clear downward flick (abnormal acceleration-y) was observed precisely at the kill moment (tick 1503), further corroborating wallhack use.\n\nUnlike Cases A–C, no significant anomalies were detected in angular change, consistent with the absence of aimbot assistance.",
+      "Case E": "Case E presents a particularly egregious example of cheating where the player employs multiple aim-assist functionalities, including both aimbot and wallhack, with no apparent attempt at concealment.\n\nThe analysis reveals three distinct behavioral patterns that align with previously documented cheating cases:\n\na) Wallhack-Induced Targeting Behavior (timestamps 1:03 and 1:08):\n- Player demonstrates targeting tendencies identical to Case A\n- Enemy highlighting appears to cause confusion about actual visibility\n- Characteristic aiming at occluded targets suggests persistent visual artifacts from wallhack overlays\n- Manifests as sustained fire directed at obstacles where enemies are positioned behind\n\nb) Pre-aiming Patterns Consistent with Wallhack Usage (timestamps 0:46 and 0:51):\n- Exhibits the same pre-aim behavior documented in Case D\n- Achieves two consecutive kills with perfect positional anticipation\n- Shows textbook wallhack utilization through flawless enemy location prediction\n\nc) Aimbot Artifacts in Tracking Movements (timestamp 0:58):\n- Displays robotic aiming corrections similar to Case C\n- Demonstrates characteristic micro-adjustments and unnatural motion curves\n- The telltale \"snapping\" behavior is particularly evident during target transitions\n\nComprehensive anomalies detected across all major kinematic features:\n- Abnormal patterns persist throughout entire engagement sequences\n- Every kill event shows deviations from legitimate play",
     };
+
+    $(document).ready(function () {
+      $('#prediction-table').DataTable({
+        paging: true,
+        searching: false,
+        info: false,
+        ordering: true,
+        pageLength: 10,
+        lengthChange: false,
+        language: {
+          paginate: {
+            previous: 'Prev',
+            next: 'Next'
+          }
+        }
+      });
+    });
+
+
 
     
     updateFrameOptions();
